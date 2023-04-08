@@ -1,12 +1,9 @@
 import { Button } from "react-bootstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useSignal } from "@preact/signals-react";
-import { theme } from "./State";
+import { count, theme } from "./State";
 
 function App() {
-  const count = useSignal(0);
-
   return (
     <div className='App' data-bs-theme='dark'>
       <h1>MapMancer</h1>

@@ -2,30 +2,32 @@ name: Build and deploy
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
+  pull_request_target:
+    types:
+      - closed
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    if_merged:
+      if: github.event.pull_request.merged == true
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-        with:
-          persist-credentials: false
-          submodules: true # TODO remove this if not using submodules in Hexo
+      steps:
+        - name: Checkout
+          uses: actions/checkout@master
+          with:
+            persist-credentials: false
+            submodules: true # TODO remove this if not using submodules in Hexo
 
-      - name: Install
-        run: yarn install
+        - name: Install
+          run: yarn install
 
-      - name: Build
-        run: |
-          yarn build --base=/MapMancer
+        - name: Build
+          run: |
+            yarn build --base=/MapMancer
 
-      - name: Deploy to GH Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          publish_dir: dist
+        - name: Deploy to GH Pages
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.ACCESS_TOKEN }}
+            publish_dir: dist

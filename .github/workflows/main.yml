@@ -1,7 +1,7 @@
 name: deploy
 
 on:
-    release:
+    workflow_dispatch
 
 jobs:
     build-and-deploy:

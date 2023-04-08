@@ -2,9 +2,6 @@ name: Build and deploy
 
 on: workflow_dispatch
 
-env:
-  BASE_PATH: 'MapMancer/'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +18,7 @@ jobs:
 
       - name: Build
         run: |
-          yarn build
+          yarn build --base=/MapMancer
 
       - name: Deploy to GH Pages
         uses: peaceiris/actions-gh-pages@v3

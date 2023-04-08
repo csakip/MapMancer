@@ -1,7 +1,7 @@
 {
   "name": "mapmancer",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Battlemap app",
   "main": "index.js",
   "repository": "https://github.com/csakip/MapMancer.git",

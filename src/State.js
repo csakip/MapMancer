@@ -4,6 +4,7 @@ import localforage from "localforage";
 // Get settings from storage
 const data = await localforage.getItem("mapmancer-settings");
 
+// Create state objects with stored data or defaults
 export const theme = signal(data?.theme || "light");
 export const count = signal(data?.count || 0);
 
@@ -14,9 +15,4 @@ effect(() => {
     count: count.value,
   };
   localforage.setItem("mapmancer-settings", data);
-});
-
-// Set theme
-effect(() => {
-  document.documentElement.setAttribute("data-bs-theme", theme.value);
 });

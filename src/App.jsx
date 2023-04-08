@@ -5,13 +5,13 @@ import { count, theme } from "./State";
 
 function App() {
   return (
-    <div className='App' data-bs-theme='dark'>
+    <div className='prevent-select' data-bs-theme='dark'>
       <h1>MapMancer</h1>
       <div>
         <Button onClick={() => count.value++}>count is {count}</Button>
       </div>
-      <div>
-        <Button onClick={() => (theme.value = theme.value === "light" ? "dark" : "light")}>them</Button>
+      <div className='mt-3'>
+        <Button onClick={() => (theme.value = theme.value === "light" ? "dark" : "light")}>theme</Button>
       </div>
     </div>
   );

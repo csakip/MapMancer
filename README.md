@@ -7,8 +7,7 @@ MapMancer is an open source battlemap application to aid online tabletop RPG ses
 You can use it in two ways:
 
 - Online - Navigate to https://csakip.github.io/MapMancer
-- Installed - Use the installer provided for your operating system in the latest release at https://github.com/csakip/MapMancer/releases/latest
-  The installed app can save files to your local system more easily, but otherwise they are identical.
+- Installed - Use the installer provided for your operating system in the [latest release](https://github.com/csakip/MapMancer/releases/latest). The installed app can save files to your local system more easily, but otherwise they are identical.
 
 ---
 
@@ -16,8 +15,8 @@ You can use it in two ways:
 
 You are welcome to help out if you feel inspired, want a feature added or want something fixed. I suggest check or raise an issue first to see if it's already in the works or not.
 
-MapMancer is a JavaScript project.
-VSCode is recommended, but not required.
+MapMancer is a JavaScript project. VSCode is recommended, but not required.
+
 The project uses:
 
 - [Vite](https://vitejs.dev/)
@@ -39,7 +38,7 @@ The project uses:
 - `yarn build` creates the web builds into `./dist`.
 - `yarn build:app` creates the native app installers into `./src-tauri/target/release/bundle`.
 
-## Developing
+### Developing
 
 - Create a feature or bugfix branch from `develop`.
 - Make your changes.

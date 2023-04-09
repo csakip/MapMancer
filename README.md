@@ -2,14 +2,12 @@
 
 MapMancer is an open source battlemap application to aid online tabletop RPG sessions.
 
-## Usage
+## How to use it
 
 You can use it in two ways:
 
 - Online - Navigate to https://csakip.github.io/MapMancer
-- Installed - Use the installer provided for your operating system in the [latest release](https://github.com/csakip/MapMancer/releases/latest). The installed app can save files to your local system more easily, but otherwise they are identical.
-
----
+- Installed - Use the installer provided for your operating system in the [latest release](https://github.com/csakip/MapMancer/releases/latest). The installed app can save files to your local system more easily but otherwise they are identical.
 
 ## Contributing
 

@@ -11,7 +11,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "app": "tauri dev"
+    "app": "tauri dev",
+    "build:app": "tauri build"
   },
   "dependencies": {
     "@preact/signals": "^1.1.3",

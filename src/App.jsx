@@ -51,12 +51,14 @@ function App() {
   }
 
   return (
-    <div className='main-container prevent-select' data-bs-theme='dark'>
+    <div className='main-container prevent-select'>
       <div id='canvas-container'>
         <div className='top-left'>
           <h1>MapMancer</h1>
           <div>
-            <Button onClick={() => count.value++}>count is {count}</Button>
+            <Button onClick={() => count.value++} variant='secondary' size='sm'>
+              count is {count}
+            </Button>
           </div>
           <div className='mt-3'>
             <Button onClick={() => (theme.value = theme.value === "light" ? "dark" : "light")}>theme</Button>

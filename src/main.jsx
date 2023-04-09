@@ -6,7 +6,7 @@ import { effect } from "@preact/signals";
 // Disable Tauri's context menu
 if (window.__TAURI__) document.addEventListener("contextmenu", (event) => event.preventDefault());
 
-// Set theme
+// Set theme on the HTML tag
 effect(() => {
   document.documentElement.setAttribute("data-bs-theme", theme.value);
 });

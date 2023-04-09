@@ -1,3 +1,9 @@
+/* Bootstrap overrides */
+.main-container button {
+  --bs-btn-border-radius: 0.15rem;
+  font-weight: bold;
+}
+
 body {
   overflow: hidden;
 }
@@ -15,4 +21,5 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  padding-left: 0.5rem;
 }

@@ -1,7 +1,13 @@
 /* Bootstrap overrides */
-.main-container button {
+.main-container .btn {
   --bs-btn-border-radius: 0.15rem;
   font-weight: bold;
+}
+.main-container .btn-primary {
+  --bs-btn-bg: #447da0;
+  --bs-btn-border-color: #386784;
+  --bs-btn-hover-bg: #386582;
+  --bs-btn-hover-border-color: #294c61;
 }
 
 body {

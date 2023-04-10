@@ -1,5 +1,32 @@
+/* Bootstrap overrides */
+.main-container .btn {
+  --bs-btn-border-radius: 0.15rem;
+  font-weight: bold;
+}
+.main-container .btn-primary {
+  --bs-btn-bg: #447da0;
+  --bs-btn-border-color: #386784;
+  --bs-btn-hover-bg: #386582;
+  --bs-btn-hover-border-color: #294c61;
+}
+
+body {
+  overflow: hidden;
+}
+
 .prevent-select {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+}
+
+#canvas-container {
+  position: relative;
+}
+#canvas-container > .top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5rem;
+  background-color: var(--bs-body-bg);
 }

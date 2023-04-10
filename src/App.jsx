@@ -1,18 +1,27 @@
-import { Button } from "react-bootstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { count, theme } from "./State";
+import { createClient } from "@supabase/supabase-js";
+import PhaserComponent from "./PhaserComponent";
+import { useEffect } from "preact/hooks";
+import UiComponent from "./UiComponent";
+
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);
 
 function App() {
+  useEffect(() => {
+    // connectToSupabase();
+  }, []);
+
+  async function connectToSupabase() {
+    const { data, error } = await supabase.auth.admin.listUsers();
+    console.log(data, error);
+  }
+
   return (
-    <div className='prevent-select' data-bs-theme='dark'>
-      <h1>MapMancer</h1>
-      <div>
-        <Button onClick={() => count.value++}>count is {count}</Button>
-      </div>
-      <div className='mt-3'>
-        <Button onClick={() => (theme.value = theme.value === "light" ? "dark" : "light")}>theme</Button>
-      </div>
+    <div className='main-container prevent-select'>
+      <PhaserComponent>
+        <UiComponent />
+      </PhaserComponent>
     </div>
   );
 }

@@ -31,7 +31,7 @@ export class MainScene extends Phaser.Scene {
 
     // Zoom on mouse wheel.
     this.input.on("wheel", (p) => {
-      const zoomStep = 0.3;
+      const zoomStep = 0.2;
       const game = this.sys.game;
       let zoomTo = camera.zoom;
 
@@ -40,16 +40,9 @@ export class MainScene extends Phaser.Scene {
       } else if (p.deltaY < 0) {
         zoomTo *= 1 + zoomStep;
       }
-      let hitZoomExtremes = false;
-      if (zoomTo < 0.05) {
-        zoomTo = 0.05;
-        hitZoomExtremes = true;
+      if (zoomTo < 0.05 || zoomTo > 2.5) {
+        return;
       }
-      if (zoomTo > 2.5) {
-        zoomTo = 2.5;
-        hitZoomExtremes = true;
-      }
-      zoomTo = Math.min(Math.max(zoomTo, 0.05), 2.5);
 
       // Zoom towards mouse pointer
       const cameraCenterInWorldX = camera.worldView.x + camera.worldView.width / 2;
@@ -57,13 +50,13 @@ export class MainScene extends Phaser.Scene {
       const mouseRelativeFromCameraX = game.input.mousePointer.worldX - cameraCenterInWorldX;
       const mouseRelativeFromCameraY = game.input.mousePointer.worldY - cameraCenterInWorldY;
 
-      let magicNumber = 0.23;
+      let magicNumber = zoomStep / (1 + zoomStep);
       if (p.deltaY > 0) {
-        magicNumber = 0.435;
+        magicNumber = -zoomStep / (1 - zoomStep);
       }
 
-      const xAdjust = mouseRelativeFromCameraX * magicNumber * -Math.sign(p.deltaY);
-      const yAdjust = mouseRelativeFromCameraY * magicNumber * -Math.sign(p.deltaY);
+      const xAdjust = mouseRelativeFromCameraX * magicNumber;
+      const yAdjust = mouseRelativeFromCameraY * magicNumber;
 
       // const tweenConfig = {
       //   targets: camera,
@@ -78,20 +71,18 @@ export class MainScene extends Phaser.Scene {
 
       // this.tweens.add(tweenConfig);
       camera.zoom = zoomTo;
-      if (!hitZoomExtremes) {
-        camera.scrollX += xAdjust;
-        camera.scrollY += yAdjust;
-      }
+      camera.scrollX += xAdjust;
+      camera.scrollY += yAdjust;
     });
 
     effect(() => {
-      console.log("effing");
       this.createGrid();
     });
   }
   createGrid() {
     const g = grid.value;
     if (this.grid) this.grid.destroy();
+
     this.grid = this.add.grid(
       this.mapImage.source[0].width / 2 + g.offsetX,
       this.mapImage.source[0].height / 2 + g.offsetY,

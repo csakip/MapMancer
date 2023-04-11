@@ -11,7 +11,7 @@ You can use it in two ways:
 
 ## Contributing
 
-You are welcome to help out if you feel inspired, want a feature added or want something fixed. I suggest check or raise an issue first to see if it's already in the works or not.
+You are welcome to help out if you feel inspired, want a feature added or want something fixed. I suggest check the issues or raise one first to see if it's already in the works or not.
 
 MapMancer is a JavaScript project. VSCode is recommended, but not required.
 

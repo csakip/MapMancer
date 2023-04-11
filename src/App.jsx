@@ -1,9 +1,10 @@
 import "./App.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createClient } from "@supabase/supabase-js";
 import PhaserComponent from "./PhaserComponent";
 import { useEffect } from "preact/hooks";
-import UiComponent from "./UiComponent";
+import UiComponent from "./UI/UiComponent";
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);
 

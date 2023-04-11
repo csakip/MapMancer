@@ -1,6 +1,11 @@
 import Phaser from "phaser";
+import { grid } from "./State";
+import { effect } from "@preact/signals";
 
 export class MainScene extends Phaser.Scene {
+  mapImage;
+  grid;
+
   constructor(game) {
     super();
   }
@@ -11,9 +16,9 @@ export class MainScene extends Phaser.Scene {
 
   create() {
     const camera = this.cameras.main;
-    const forest_glade_map = this.textures.get("forest_glade_map");
+    this.mapImage = this.textures.get("forest_glade_map");
     this.add.image(0, 0, "forest_glade_map").setOrigin(0, 0);
-    camera.centerOn(forest_glade_map.source[0].width / 2, forest_glade_map.source[0].height / 2);
+    camera.centerOn(this.mapImage.source[0].width / 2, this.mapImage.source[0].height / 2);
     camera.setZoom(1);
 
     // Drag map with mouse
@@ -78,5 +83,27 @@ export class MainScene extends Phaser.Scene {
         camera.scrollY += yAdjust;
       }
     });
+
+    effect(() => {
+      console.log("effing");
+      this.createGrid();
+    });
   }
+  createGrid() {
+    const g = grid.value;
+    if (this.grid) this.grid.destroy();
+    this.grid = this.add.grid(
+      this.mapImage.source[0].width / 2 + g.offsetX,
+      this.mapImage.source[0].height / 2 + g.offsetY,
+      this.mapImage.source[0].width + g.width * 2,
+      this.mapImage.source[0].height + g.height * 2,
+      g.width,
+      g.height,
+      undefined,
+      undefined,
+      g.color,
+      g.alpha
+    );
+  }
+  update() {}
 }

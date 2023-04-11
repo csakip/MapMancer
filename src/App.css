@@ -26,6 +26,15 @@ body {
   user-select: none; /* Standard syntax */
 }
 
+.rotate-45::before {
+  transform: rotateZ(-45deg);
+}
+.rotate-90::before {
+  transform: rotateZ(90deg);
+}
+
+/* ---------------------------- */
+
 #canvas-container {
   position: relative;
   flex: 1;

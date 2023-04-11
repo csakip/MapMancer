@@ -1,7 +1,7 @@
+import { useSignal } from "@preact/signals";
 import { Button } from "react-bootstrap";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { count, theme } from "./State";
+import { count, theme } from "../State";
+import GridUI from "./GridUI";
 
 export default function UiComponent(props) {
   return (
@@ -14,6 +14,9 @@ export default function UiComponent(props) {
       </div>
       <div className='mt-3'>
         <Button onClick={() => (theme.value = theme.value === "light" ? "dark" : "light")}>theme</Button>
+      </div>
+      <div className='mt-3'>
+        <GridUI />
       </div>
     </div>
   );

@@ -1,3 +1,13 @@
+body {
+  overflow: hidden;
+}
+
+.main-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
 /* Bootstrap overrides */
 .main-container .btn {
   --bs-btn-border-radius: 0.15rem;
@@ -10,18 +20,24 @@
   --bs-btn-hover-border-color: #294c61;
 }
 
-body {
-  overflow: hidden;
-}
-
 .prevent-select {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
 
+.rotate-45::before {
+  transform: rotateZ(-45deg);
+}
+.rotate-90::before {
+  transform: rotateZ(90deg);
+}
+
+/* ---------------------------- */
+
 #canvas-container {
   position: relative;
+  flex: 1;
 }
 #canvas-container > .top-left {
   position: absolute;

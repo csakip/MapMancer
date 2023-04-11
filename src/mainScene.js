@@ -1,9 +1,12 @@
 import Phaser from "phaser";
+import { grid } from "./State";
+import { effect } from "@preact/signals";
 
 export class MainScene extends Phaser.Scene {
-  zoomTo = 1;
+  mapImage;
+  grid;
 
-  constructor() {
+  constructor(game) {
     super();
   }
 
@@ -13,12 +16,10 @@ export class MainScene extends Phaser.Scene {
 
   create() {
     const camera = this.cameras.main;
-    const forest_glade_map = this.textures.get("forest_glade_map");
-    console.log(forest_glade_map.source[0].width);
+    this.mapImage = this.textures.get("forest_glade_map");
     this.add.image(0, 0, "forest_glade_map").setOrigin(0, 0);
-    camera.setBounds(0, 0, forest_glade_map.source[0].width, forest_glade_map.source[0].height);
-    camera.setZoom(0.5);
-    this.zoomTo = camera.zoom;
+    camera.centerOn(this.mapImage.source[0].width / 2, this.mapImage.source[0].height / 2);
+    camera.setZoom(1);
 
     // Drag map with mouse
     this.input.on("pointermove", (p) => {
@@ -29,29 +30,71 @@ export class MainScene extends Phaser.Scene {
     });
 
     // Zoom on mouse wheel.
-    this.input.on("wheel", (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+    this.input.on("wheel", (p) => {
       const zoomStep = 0.2;
+      const game = this.sys.game;
+      let zoomTo = camera.zoom;
 
-      if (deltaY > 0) {
-        this.zoomTo *= 1 - zoomStep;
-      } else if (deltaY < 0) {
-        this.zoomTo *= 1 + zoomStep;
+      if (p.deltaY > 0) {
+        zoomTo *= 1 - zoomStep;
+      } else if (p.deltaY < 0) {
+        zoomTo *= 1 + zoomStep;
+      }
+      if (zoomTo < 0.05 || zoomTo > 2.5) {
+        return;
       }
 
-      // TODO: zoom to mouse pointer
+      // Zoom towards mouse pointer
+      const cameraCenterInWorldX = camera.worldView.x + camera.worldView.width / 2;
+      const cameraCenterInWorldY = camera.worldView.y + camera.worldView.height / 2;
+      const mouseRelativeFromCameraX = game.input.mousePointer.worldX - cameraCenterInWorldX;
+      const mouseRelativeFromCameraY = game.input.mousePointer.worldY - cameraCenterInWorldY;
 
-      this.zoomTo = Math.min(Math.max(this.zoomTo, 0.1), 2);
+      let magicNumber = zoomStep / (1 + zoomStep);
+      if (p.deltaY > 0) {
+        magicNumber = -zoomStep / (1 - zoomStep);
+      }
 
-      const tweenConfig = {
-        targets: camera,
-        zoom: this.zoomTo,
-        ease: "Linear",
-        duration: 100,
-        repeat: 0,
-        yoyo: false,
-      };
+      const xAdjust = mouseRelativeFromCameraX * magicNumber;
+      const yAdjust = mouseRelativeFromCameraY * magicNumber;
 
-      this.tweens.add(tweenConfig);
+      // const tweenConfig = {
+      //   targets: camera,
+      //   zoom: zoomTo,
+      //   ease: "Linear",
+      //   duration: 100,
+      //   repeat: 0,
+      //   yoyo: false,
+      //   scrollX: camera.scrollX + xAdjust,
+      //   scrollY: camera.scrollY + yAdjust,
+      // };
+
+      // this.tweens.add(tweenConfig);
+      camera.zoom = zoomTo;
+      camera.scrollX += xAdjust;
+      camera.scrollY += yAdjust;
+    });
+
+    effect(() => {
+      this.createGrid();
     });
   }
+  createGrid() {
+    const g = grid.value;
+    if (this.grid) this.grid.destroy();
+
+    this.grid = this.add.grid(
+      this.mapImage.source[0].width / 2 + g.offsetX,
+      this.mapImage.source[0].height / 2 + g.offsetY,
+      this.mapImage.source[0].width + g.width * 2,
+      this.mapImage.source[0].height + g.height * 2,
+      g.width,
+      g.height,
+      undefined,
+      undefined,
+      g.color,
+      g.alpha
+    );
+  }
+  update() {}
 }

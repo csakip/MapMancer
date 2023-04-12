@@ -18,6 +18,15 @@ body {
   --bs-btn-border-color: #386784;
   --bs-btn-hover-bg: #386582;
   --bs-btn-hover-border-color: #294c61;
+  --bs-btn-active-color: rgb(255, 189, 57);
+  --bs-btn-active-bg: #2e5c7a;
+  --bs-btn-active-border-color: #27455a;
+}
+.main-container .btn-group-sm > .btn,
+.main-container .btn-sm {
+  font-size: 1.1rem;
+  --bs-btn-padding-y: 0.15rem;
+  --bs-btn-padding-x: 0.35rem;
 }
 
 .prevent-select {
@@ -39,10 +48,23 @@ body {
   position: relative;
   flex: 1;
 }
+
 #canvas-container > .top-left {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.5rem;
+}
+#canvas-container > .bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.panel {
   background-color: var(--bs-body-bg);
+  border-bottom: 1px solid #8888;
+}
+
+#toolbar .btn-group-vertical button {
+  height: 38px;
 }

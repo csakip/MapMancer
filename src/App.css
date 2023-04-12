@@ -8,7 +8,18 @@ body {
   height: 100vh;
 }
 
-/* Bootstrap overrides */
+/* --------------------- Bootstrap overrides --------------------- */
+.main-container {
+  --bs-primary: #447da0;
+}
+.main-container .form-check-input:checked {
+  background-color: #447da0;
+  border-color: #447da0;
+}
+
+.main-container .form-control:focus {
+  box-shadow: none;
+}
 .main-container .btn {
   --bs-btn-border-radius: 0.15rem;
   font-weight: bold;
@@ -28,6 +39,17 @@ body {
   --bs-btn-padding-y: 0.15rem;
   --bs-btn-padding-x: 0.35rem;
 }
+.main-container input::-webkit-outer-spin-button,
+.main-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.main-container input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ------------------- End of Bootstrap overrides ------------------*/
 
 .prevent-select {
   -webkit-user-select: none; /* Safari */
@@ -67,4 +89,23 @@ body {
 
 #toolbar .btn-group-vertical button {
   height: 38px;
+}
+
+.panel .input-number-drag {
+  width: unset;
+}
+
+.tool-help-text {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
+.tool-help-text ul {
+  padding-left: 0;
+  list-style-position: inside;
+  margin-bottom: 0;
+}
+
+#tool-grid,
+#tool-settings {
+  width: 15rem;
 }

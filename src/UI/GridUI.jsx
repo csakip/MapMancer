@@ -1,26 +1,23 @@
 import { useSignal } from "@preact/signals";
 import produce from "immer";
-import { Button, ButtonGroup, FormLabel } from "react-bootstrap";
-import { grid } from "../State";
+import { Button, FormLabel } from "react-bootstrap";
+import { grid, showHelpTextDefault } from "../State";
+import InputNumber from "./InputNumber";
 
 export default function GridUI() {
   const gridSizeLinked = useSignal(true);
 
-  function offset(x, y) {
+  function changeOffset(x, y) {
+    x = parseInt(x);
+    y = parseInt(y);
+    if (isNaN(x) || isNaN(y)) return;
     grid.value = produce(grid.value, (g) => {
-      g.offsetX += x;
+      g.offsetX = x;
       if (g.offsetX < 0) g.offsetX += g.width;
       if (g.offsetX > g.width) g.offsetX -= g.width;
-      g.offsetY += y;
+      g.offsetY = y;
       if (g.offsetY < 0) g.offsetY += g.height;
       if (g.offsetY > g.height) g.offsetY -= g.height;
-    });
-  }
-
-  function expand(w, h) {
-    grid.value = produce(grid.value, (g) => {
-      if (g.width > 5 || w > 0) g.width += w;
-      if (g.height > 5 || h > 0) g.height += h;
     });
   }
 
@@ -32,95 +29,51 @@ export default function GridUI() {
       });
   }
 
-  const sizeLabel = gridSizeLinked.value ? `(${grid.value.width})` : `(${grid.value.width} x ${grid.value.height})`;
-  const offsetLabel = `(${grid.value.offsetX} x ${grid.value.offsetY})`;
+  function changeSize(w, h) {
+    w = parseInt(w);
+    h = parseInt(h);
+    if (isNaN(w) || isNaN(h)) return;
+    if (gridSizeLinked.value) h = w;
+    grid.value = produce(grid.value, (g) => {
+      g.width = Math.max(5, w);
+      g.height = Math.max(5, h);
+    });
+  }
 
   return (
-    <div className='p-2 panel'>
+    <div id='tool-grid' className='p-2 panel'>
       <h4>Grid</h4>
       <div className='d-flex align-items-center'>
-        <FormLabel className='flex-grow-1 mb-0 me-1'>Size {sizeLabel}</FormLabel>
-        {!gridSizeLinked.value && (
-          <>
-            <ButtonGroup size='sm'>
-              <Button
-                onClick={() => {
-                  expand(-1, 0);
-                }}>
-                <i class='bi bi-arrows-collapse rotate-90'></i>
-              </Button>
-              <Button
-                onClick={() => {
-                  expand(1, 0);
-                }}>
-                <i class='bi bi-arrows-expand rotate-90'></i>
-              </Button>
-            </ButtonGroup>
-            <ButtonGroup size='sm' className='ms-1'>
-              <Button
-                onClick={() => {
-                  expand(0, -1);
-                }}>
-                <i class='bi bi-arrows-collapse'></i>
-              </Button>
-              <Button
-                onClick={() => {
-                  expand(0, 1);
-                }}>
-                <i class='bi bi-arrows-expand'></i>
-              </Button>
-            </ButtonGroup>
-          </>
-        )}
-        {gridSizeLinked.value && (
-          <ButtonGroup size='sm'>
-            <Button
-              onClick={() => {
-                expand(-1, -1);
-              }}>
-              <i class='bi bi-arrows-collapse rotate-45'></i>
-            </Button>
-            <Button
-              onClick={() => {
-                expand(1, 1);
-              }}>
-              <i class='bi bi-arrows-expand rotate-45'></i>
-            </Button>
-          </ButtonGroup>
-        )}
+        <FormLabel className='flex-grow-1 mb-0 me-1'>Size</FormLabel>
+        <>
+          <InputNumber value={grid.value.width} onChange={(e) => changeSize(e.target.value, grid.value.height)} htmlSize='1' />
+          {!gridSizeLinked.value && (
+            <>
+              <i class='bi bi-x'></i>
+              <InputNumber
+                value={grid.value.height}
+                onChange={(e) => changeSize(grid.value.width, e.target.value)}
+                htmlSize='1'
+              />
+            </>
+          )}
+        </>
         <Button size='sm' className='ms-1 px-0' variant={gridSizeLinked.value ? "primary" : "secondary"} onClick={toggleLinked}>
           <i class='bi bi-link rotate-90'></i>
         </Button>
       </div>
       <div className='mt-3 d-flex align-items-center'>
-        <FormLabel className='flex-grow-1 mb-0 me-1'>Offset {offsetLabel}</FormLabel>
-        <ButtonGroup size='sm'>
-          <Button
-            onClick={() => {
-              offset(-1, 0);
-            }}>
-            <i class='bi bi-arrow-left'></i>
-          </Button>
-          <Button
-            onClick={() => {
-              offset(1, 0);
-            }}>
-            <i class='bi bi-arrow-right'></i>
-          </Button>
-          <Button
-            onClick={() => {
-              offset(0, -1);
-            }}>
-            <i class='bi bi-arrow-up'></i>
-          </Button>
-          <Button
-            onClick={() => {
-              offset(0, 1);
-            }}>
-            <i class='bi bi-arrow-down'></i>
-          </Button>
-        </ButtonGroup>
+        <FormLabel className='flex-grow-1 mb-0 me-1'>Offset</FormLabel>
+        <InputNumber value={grid.value.offsetX} onChange={(e) => changeOffset(e.target.value, grid.value.offsetY)} htmlSize='1' />
+        <InputNumber value={grid.value.offsetY} onChange={(e) => changeOffset(grid.value.offsetX, e.target.value)} htmlSize='1' />
       </div>
+      {showHelpTextDefault.value && (
+        <div className='tool-help-text'>
+          <ul>
+            <li>Focus a number field and use mouse wheel or cursor up / down to adjust the value.</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

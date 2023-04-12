@@ -5,7 +5,10 @@ import localforage from "localforage";
 const data = await localforage.getItem("mapmancer-settings");
 
 // Create state objects with stored data or defaults
-export const theme = signal(data?.theme || "light");
+export const theme = signal(data?.theme || "dark");
+export const showHelpTextDefault = signal(data?.showHelpTextDefault !== undefined ? data.showHelpTextDefault : true);
+console.log(data?.showHelpTextDefault);
+
 export const toolHelpText = signal(null);
 
 export const grid = signal(
@@ -27,6 +30,7 @@ export const grid = signal(
 effect(() => {
   const data = {
     theme: theme.value,
+    showHelpTextDefault: showHelpTextDefault.value,
   };
   localforage.setItem("mapmancer-settings", data);
 });

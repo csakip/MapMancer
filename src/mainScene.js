@@ -6,7 +6,7 @@ export class MainScene extends Phaser.Scene {
   mapImage;
   grid;
 
-  constructor(game) {
+  constructor() {
     super();
   }
 
@@ -79,6 +79,7 @@ export class MainScene extends Phaser.Scene {
       this.createGrid();
     });
   }
+
   createGrid() {
     const g = grid.value;
     if (this.grid) this.grid.destroy();
@@ -96,5 +97,6 @@ export class MainScene extends Phaser.Scene {
       g.alpha
     );
   }
+
   update() {}
 }

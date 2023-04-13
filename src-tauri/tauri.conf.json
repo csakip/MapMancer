@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "MapMancer",
+    "productName": "Mapmancer",
     "version": "0.0.0"
   },
   "tauri": {
@@ -56,7 +56,7 @@
         "height": 600,
         "resizable": true,
         "maximized": true,
-        "title": "MapMancer",
+        "title": "Mapmancer",
         "width": 800
       }
     ]

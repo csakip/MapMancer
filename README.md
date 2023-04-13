@@ -41,4 +41,4 @@ The project uses:
 - Create a feature or bugfix branch from `develop`.
 - Make your changes.
 - Create a pull request against `develop`.
-- After it is approved, it will get merged into the `main` branch, which will trigger a deployment to the `gh-pages` branch, which is a GitHub page at https://csakip.github.io/MapMancer
+- After it is approved, it will get merged into the `main` branch, which will trigger a deployment to the `gh-pages` branch, which is a GitHub page at https://csakip.github.io/Mapmancer

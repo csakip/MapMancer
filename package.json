@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "Battlemap app",
   "main": "index.js",
-  "repository": "https://github.com/csakip/MapMancer.git",
+  "repository": "https://github.com/csakip/Mapmancer.git",
   "author": "Peter Csaki <csakip01@gmail.com>",
   "license": "GPL-3.0-or-later",
   "scripts": {

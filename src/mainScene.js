@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { grid } from "./State";
 import { effect } from "@preact/signals";
+import { mapRanges } from "./helpers";
 
 export class MainScene extends Phaser.Scene {
   mapImage;
@@ -75,6 +76,43 @@ export class MainScene extends Phaser.Scene {
       camera.scrollY += yAdjust;
     });
 
+    const backgroundColor = "#000000";
+
+    const overflowSize = 1000;
+    // These rectangles cover the grid's overflowing parts.
+    const leftCoverRect = this.add.rectangle(
+      -overflowSize / 2,
+      this.mapImage.source[0].height / 2,
+      overflowSize,
+      this.mapImage.source[0].height + overflowSize * 2,
+      backgroundColor
+    );
+    leftCoverRect.setDepth(1);
+    const rightCoverRect = this.add.rectangle(
+      this.mapImage.source[0].width + overflowSize / 2,
+      this.mapImage.source[0].height / 2,
+      overflowSize,
+      this.mapImage.source[0].height + overflowSize * 2,
+      backgroundColor
+    );
+    rightCoverRect.setDepth(1);
+    const topCoverRect = this.add.rectangle(
+      this.mapImage.source[0].width / 2,
+      -overflowSize / 2,
+      this.mapImage.source[0].width,
+      overflowSize,
+      backgroundColor
+    );
+    topCoverRect.setDepth(1);
+    const bottomCoverRect = this.add.rectangle(
+      this.mapImage.source[0].width / 2,
+      this.mapImage.source[0].height + overflowSize / 2,
+      this.mapImage.source[0].width,
+      overflowSize,
+      backgroundColor
+    );
+    bottomCoverRect.setDepth(1);
+
     effect(() => {
       this.createGrid();
     });
@@ -83,19 +121,23 @@ export class MainScene extends Phaser.Scene {
   createGrid() {
     const g = grid.value;
     if (this.grid) this.grid.destroy();
+    if (!g.enabled) return;
+    const color = g.color.substr(0, 7);
+    const alpha = mapRanges(parseInt(g.color.length > 7 ? g.color.substr(7, 2) : "ff", 16), 0, 255, 0.05, 1);
 
     this.grid = this.add.grid(
       this.mapImage.source[0].width / 2 + g.offsetX,
       this.mapImage.source[0].height / 2 + g.offsetY,
-      this.mapImage.source[0].width + g.width * 2,
-      this.mapImage.source[0].height + g.height * 2,
-      g.width,
-      g.height,
+      this.mapImage.source[0].width + Math.max(5, g.width) * 2,
+      this.mapImage.source[0].height + Math.max(5, g.height) * 2,
+      Math.max(5, g.width),
+      Math.max(5, g.height),
       undefined,
       undefined,
-      g.color,
-      g.alpha
+      Phaser.Display.Color.HexStringToColor(color).color,
+      alpha
     );
+    this.grid.setDepth(0);
   }
 
   update() {}

@@ -113,3 +113,22 @@ input[type="number"][size] {
 #tool-settings {
   width: 15rem;
 }
+
+/* ------------------- Color picker overrides ------------------*/
+.main-container .react-colorful__hue {
+  height: 20px;
+}
+.main-container .react-colorful__alpha-pointer,
+.main-container .react-colorful__hue-pointer {
+  width: 12px;
+  height: 22px;
+  border-radius: 2px;
+}
+.main-container .react-colorful__saturation-pointer {
+  width: 20px;
+  height: 20px;
+}
+.main-container .react-colorful__alpha {
+  height: 20px;
+}
+/* ------------------- End of Color picker overrides ------------------*/

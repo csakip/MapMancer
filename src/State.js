@@ -17,12 +17,11 @@ export const grid = signal(
     offsetY: 0,
     width: 50,
     height: 50,
-    color: "#fff",
-    alpha: 0.5,
+    color: "#00000088",
     type: "rectangle",
     snap: false,
     measurement: "Euclidean",
-    draw: true,
+    enabled: true,
   }
 );
 

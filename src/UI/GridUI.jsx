@@ -64,7 +64,9 @@ export default function GridUI() {
       </div>
       <div className='mt-3 d-flex align-items-center'>
         <FormLabel className='flex-grow-1 mb-0 me-1'>Offset</FormLabel>
+        <FormLabel className='mb-0 me-1'>x:</FormLabel>
         <InputNumber value={grid.value.offsetX} onChange={(e) => changeOffset(e.target.value, grid.value.offsetY)} htmlSize='1' />
+        <FormLabel className='mb-0 mx-1'>y:</FormLabel>
         <InputNumber value={grid.value.offsetY} onChange={(e) => changeOffset(grid.value.offsetX, e.target.value)} htmlSize='1' />
       </div>
       {showHelpTextDefault.value && (

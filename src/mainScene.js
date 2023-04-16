@@ -27,7 +27,6 @@ export class MainScene extends Phaser.Scene {
       if (!p.isDown) return;
       camera.scrollX -= (p.x - p.prevPosition.x) / camera.zoom;
       camera.scrollY -= (p.y - p.prevPosition.y) / camera.zoom;
-      // TODO: set movement boundaries
     });
 
     // Zoom on mouse wheel.

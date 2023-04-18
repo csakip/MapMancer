@@ -53,6 +53,12 @@ export default function GridUI() {
     });
   }
 
+  function setLineWidth(width) {
+    grid.value = produce(grid.value, (g) => {
+      g.lineWidth = isNaN(parseFloat(width)) ? 0 : parseFloat(width);
+    });
+  }
+
   return (
     <div id='tool-grid' className='p-2 panel'>
       <h4>Grid</h4>
@@ -63,17 +69,39 @@ export default function GridUI() {
       <div className='d-flex align-items-center mt-1'>
         <FormLabel className='flex-grow-1 mb-0 me-1'>Size</FormLabel>
         <>
-          <InputNumber value={grid.value.width} onChange={(e) => setSize(e.target.value, grid.value.height)} htmlSize='1' />
+          <InputNumber
+            value={grid.value.width}
+            onChange={(e) => setSize(e.target.value, grid.value.height)}
+            htmlSize='1'
+            min='5'
+          />
           {!gridSizeLinked.value && (
             <>
               <i class='bi bi-x'></i>
-              <InputNumber value={grid.value.height} onChange={(e) => setSize(grid.value.width, e.target.value)} htmlSize='1' />
+              <InputNumber
+                value={grid.value.height}
+                onChange={(e) => setSize(grid.value.width, e.target.value)}
+                htmlSize='1'
+                min='5'
+              />
             </>
           )}
         </>
         <Button size='sm' className='ms-1 px-0' variant={gridSizeLinked.value ? "primary" : "secondary"} onClick={toggleLinked}>
           <i class='bi bi-link rotate-90'></i>
         </Button>
+      </div>
+      <div className='d-flex align-items-center mt-1'>
+        <FormLabel className='flex-grow-1 mb-0 me-1'>Thickness</FormLabel>
+        <InputNumber
+          value={grid.value.lineWidth}
+          onChange={(e) => setLineWidth(e.target.value)}
+          htmlSize='1'
+          min='0.5'
+          step='0.5'
+          max={grid.value.width}
+          allowDecimals
+        />
       </div>
       <div className='mt-3 d-flex align-items-center'>
         <FormLabel className='flex-grow-1 mb-0 me-1'>Offset</FormLabel>

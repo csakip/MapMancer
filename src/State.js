@@ -21,6 +21,7 @@ export const grid = signal(
     type: "rectangle",
     snap: false,
     measurement: "Euclidean",
+    lineWidth: 2,
     enabled: true,
   }
 );

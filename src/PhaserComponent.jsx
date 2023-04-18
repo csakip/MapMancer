@@ -10,7 +10,7 @@ export default function PhaserComponent(props) {
     const scene = new MainScene();
 
     const config = {
-      type: Phaser.AUTO,
+      type: Phaser.CANVAS,
       disableContextMenu: true,
       expandParent: true,
       hidePhaser: true,

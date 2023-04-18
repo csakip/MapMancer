@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 
-export default function InputNumber({ value, onChange, htmlSize, allowDecimals = false }) {
+export default function InputNumber({ value, onChange, htmlSize, allowDecimals = false, step, max, min }) {
   const arrowsKeyCodes = [37, 38, 39, 40];
   const numPadNumberKeyCodes = [96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
   const dots = [110, 190];
@@ -31,6 +31,9 @@ export default function InputNumber({ value, onChange, htmlSize, allowDecimals =
       size='sm'
       htmlSize={htmlSize}
       onKeyDown={keyDown}
+      step={step}
+      max={max}
+      min={min}
     />
   );
 }

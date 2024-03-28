@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createClient } from "@supabase/supabase-js";
-import PhaserComponent from "./PhaserComponent";
+import KaboomComponent from "./kaboom/KaboomComponent";
 import { useEffect } from "preact/hooks";
 import UiComponent from "./UI/UiComponent";
 
@@ -20,9 +20,9 @@ function App() {
 
   return (
     <div className='main-container prevent-select'>
-      <PhaserComponent>
+      <KaboomComponent>
         <UiComponent />
-      </PhaserComponent>
+      </KaboomComponent>
     </div>
   );
 }

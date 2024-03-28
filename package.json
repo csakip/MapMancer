@@ -21,7 +21,6 @@
     "bootstrap-icons": "^1.10.4",
     "immer": "^9.0.21",
     "localforage": "^1.10.0",
-    "phaser": "^3.55.2",
     "preact": "^10.13.2",
     "preact-compat": "^3.19.0",
     "react-bootstrap": "^2.7.2",

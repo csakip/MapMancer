@@ -80,7 +80,7 @@ export default function UiComponent(props) {
       </div>
       {toolHelpText.value && (
         <div className='bottom-left'>
-          <div className='panel px-3 py-1'>{toolHelpText.value}</div>
+          <div className='panel px-2 py-0'>{toolHelpText.value}</div>
         </div>
       )}
     </>

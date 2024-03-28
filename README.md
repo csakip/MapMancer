@@ -19,7 +19,7 @@ The project uses:
 
 - [Vite](https://vitejs.dev/)
 - [Preact](https://preactjs.com/)
-- [Phaser](https://phaser.io/)
+- [Kaboom.js](https://kaboomjs.com/)
 - [Bootstrap](https://getbootstrap.com/)
 - [Supabase](https://supabase.com/)
 - [Tauri](https://tauri.app/)
